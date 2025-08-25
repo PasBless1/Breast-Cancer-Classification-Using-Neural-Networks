@@ -98,6 +98,4 @@ jupyter notebook DL_Project_1_Breast_Cancer_Classification_with_NN.ipynb
 * Dataset accessed via **scikit-learn** (`load_breast_cancer`).
 * Please cite this repository if you build upon the code or results.
 
----
 
-If you’d like, I can add a **Figures** section (ROC, PR, calibration, confusion matrix) and a minimal **FastAPI** app in `api/` that loads the saved scaler/model and serves `/predict`.
