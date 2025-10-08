@@ -1,18 +1,82 @@
 # Breast Cancer Classification with Neural Networks: A Reproducible Baseline
 
-## Abstract
+## Project Overview
+This project implements a deep learning pipeline to classify breast tumors as malignant or benign using the Wisconsin Breast Cancer Diagnostic dataset. The goal is to build an accurate, robust, and clinically relevant predictive system that can aid in the early detection of breast cancer using artificial neural networks.
 
-This repository presents a concise, **reproducible** baseline for binary breast cancer classification using a shallow neural network. The pipeline demonstrates end-to-end practice suitable for clinical ML prototyping: deterministic data partitioning, leakage-safe preprocessing, training with internal validation, held-out test evaluation, and deployment-ready single-sample inference. On the scikit-learn breast cancer dataset (569 samples, 30 features), the model achieves **93.9%** test accuracy (loss **0.169**), with a **best validation accuracy of 97.8%** (final validation loss **0.122**).
+## Motivation
+Early diagnosis of breast cancer significantly increases the chances of successful treatment and patient survival. Traditional diagnostic methods are limited by human interpretation, which can lead to misclassification, especially when tumors have subtle or heterogeneous features. By automating the diagnostic process with neural networks trained on rich digital pathology data, this project aims to provide reliable, explainable, and scalable breast cancer screening.
 
----
+## Dataset
+Source: UCI Wisconsin Breast Cancer Diagnostic Dataset (via scikit-learn)
 
-## Data & Problem
+Records: 569 patients
 
-* **Task:** Binary classification (malignant vs. benign).
-* **Dataset:** `sklearn.datasets.load_breast_cancer` (569 samples; 30 standardized numeric features).
-* **Split:** **80/20** train/test, **stratified**, fixed random seed.
+Features: 30 numerical attributes extracted from digitized images of fine needle aspirate (FNA) of breast masses (e.g., mean radius, texture, perimeter, area, smoothness, compactness, concavity, symmetry, and fractal dimension across mean, error, and worst-case values)
 
----
+Target Classes: 0 (Malignant), 1 (Benign)
+
+Class Balance: 212 malignant, 357 benign
+
+All features are continuous, and there are no missing values, making this dataset ideal for training deep learning models for medical imaging tasks
+
+## Methodology
+**Data Preprocessing**
+
+Converted and explored the dataset using pandas and numpy.
+
+Standardized all features using StandardScaler to ensure robust and stable neural network training.
+
+Employed an 80/20 stratified split for training and testing to maintain the class distribution in both sets.
+
+**Model Architecture**
+
+Sequential Feedforward Neural Network built using TensorFlow and Keras.
+
+Input Layer: Flattened vector of 30 features.
+
+Hidden Layer: Dense layer with 20 neurons and ReLU activation.
+
+Output Layer: Dense layer with 2 neurons and sigmoid activation for binary classification.
+
+Optimization: Adam optimizer and sparse categorical crossentropy loss function.
+
+Training: 10 epochs with a 10% validation split to monitor overfitting and learning progress.
+
+**Evaluation**
+
+Accuracy on Test Data: 93.86%
+
+Loss convergence and validation accuracy tracked over epochs, showing consistent improvement and minimal overfitting.
+
+The predictive system uses probability-based outputs, with the argmax function mapping predictions to the relevant class label (malignant or benign).
+
+**Results**
+Achieved high test accuracy (93.86%), demonstrating the effectiveness of the neural network in distinguishing between malignant and benign cases.
+
+The standardized feature pipeline and straightforward model architecture make this approach highly reproducible and extensible to other medical imaging datasets.
+
+Provides interpretable decision support for clinicians, with rapid and automated assessment of digital pathology inputs.
+
+## Discussion
+**Strengths**
+Utilizes well-curated, real-world dataset from digitized clinical data.
+
+Achieves high accuracy with a relatively simple neural network structure.
+
+End-to-end automated workflow for data standardization, training, evaluation, and prediction.
+
+Easily extendable to multiclass or more complex architectures (e.g., deeper networks, convolutional models) for future research.
+
+**Limitations**
+Relatively small, single-institution dataset might limit generalizability for broader populations.
+
+Current architecture does not provide uncertainty estimation or model explanation for each decision.
+
+Results should be validated on external, more diverse datasets for regulatory or clinical deployment.
+
+## Conclusion
+This project demonstrates that accurate and robust breast cancer detection is achievable through careful feature engineering, data standardization, and streamlined neural network modeling. The pipeline presented offers a blueprint for digital diagnostic tools in medical imaging and can serve as a foundation for future research in clinical machine learning and digital pathology.
+
 
 ## Methods
 
@@ -72,17 +136,6 @@ pip install numpy pandas scikit-learn tensorflow matplotlib jupyter
 # Run the notebook
 jupyter notebook DL_Project_1_Breast_Cancer_Classification_with_NN.ipynb
 ```
-
----
-
-## What This Demonstrates (Skills & Practice)
-
-* **End-to-end ML engineering:** data ingestion → leakage-safe preprocessing → training/validation → held-out testing → single-sample inference.
-* **Validation rigor:** internal validation split with learning-curve diagnostics, plus fixed seeds for reproducibility.
-* **Deployment awareness:** consistent preprocessing at inference, correct probability-to-label mapping, and a clean path to packaging (scaler + model).
-
----
-
 ## Limitations & Future Work
 
 * **Metrics:** add AUC-ROC/AUPRC, confusion matrix, precision/recall/F1, and **calibration** (ECE, Brier score).
