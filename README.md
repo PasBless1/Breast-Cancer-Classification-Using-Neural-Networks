@@ -50,6 +50,12 @@ Loss convergence and validation accuracy tracked over epochs, showing consistent
 
 The predictive system uses probability-based outputs, with the argmax function mapping predictions to the relevant class label (malignant or benign).
 
+<img width="577" height="420" alt="image" src="https://github.com/user-attachments/assets/cb93d9d1-1058-415e-ae1f-68dcc7670dc6" />
+
+<img width="580" height="412" alt="image" src="https://github.com/user-attachments/assets/47f446b4-93d9-4158-8323-8c1b22005de4" />
+
+
+
 **Results**
 Achieved high test accuracy (93.86%), demonstrating the effectiveness of the neural network in distinguishing between malignant and benign cases.
 
